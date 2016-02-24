@@ -5,71 +5,57 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string.h>
-#include <SuperMarket.h>
-#include <Queue.h>
-#include <Stack.h>
-#include <Order.h>
+//#include <Queue.h>
+//#include <Stack.h>
+//#include <Order.h>
 
 using namespace std;
 
 /**
-@param const int arg c
-@param const char * argv[]
-The purpose of this function is to take in an input textfile, read the integers on each
-line and store them in an array. The program will not store the value if it is a
-duplicate. Then the size of the array is outputted and an output file is made with
-the values of the array in reverse order.
-*/
+  @param const int arg c
+  @param const char * argv[]
+  The purpose of this function is to take in an input textfile, read the integers on each
+  line and store them in an array. The program will not store the value if it is a
+  duplicate. Then the size of the array is outputted and an output file is made with
+  the values of the array in reverse order.
+  */
 int main (const int argc, const char * argv []) {
-string line;
-	ifstream myfile (argv[1]);
-	string str = ""; 
 
-	int myArray[256];
-	int c = 0;
-	int temp;
+	ifstream in(argv[1]);
+	stringstream buffer;
+	buffer << in.rdbuf();
+	string test = buffer.str();
+	cout << test << endl << endl;
 
-	if (myfile.is_open())
-	{
-		while (getline (myfile,line))
-		{
-		  temp = c;
-		  for (int i = 0; i < temp; i++) {
-		    if(stoi(line) != myArray[i]) { //checks for duplicates
-		      //only allows array size to increase if at end of loop
-		      if (i == temp - 1){
-			myArray[c] = stoi(line);
-			c++;
-		      }
-		    }
-		    else if(stoi(line) == myArray[i]) {
-		      break; //if duplicate, leaves loop
-		    }
-		  }
-		  if (temp == 0){ //sets first value of array
-		    
-		    myArray[c] = stoi(line);
-		    c++;
-		  }
-		}	
-		
-		cout << "Array size: " << c << endl;//prints array size
-		
-		myfile.close();
-		
-		
+	//create variables that will act as "cursors". we'll take everything between them.
+	size_t pos1 = 0;
+	size_t pos2;
+
+	//create the array to store the strings.
+	string str[256];
+
+	for (int x = 0; x <= 3; x++){
+		pos2 = test.find(",", pos1); //search for the bar "|". pos2 will be where the bar was found.
+		str[x] = test.substr(pos1, (pos2-pos1)); //make a substring, wich is nothing more 
+		//than a copy of a fragment of the big string.
+		cout << str[x] << endl;
+		cout << "pos1:" << pos1 << ", pos2:" << pos2 << endl;
+		pos1 = pos2+1; // sets pos1 to the next character after pos2. 
+		//so, it can start searching the next bar |.
+
 		ofstream outputFile;
 		outputFile.open("output.txt"); //creates text file for outfile
-		
-		for (int i = c - 1; i >= 0; i--){
-		  outputFile << myArray[i] << endl;
-		} //for loop to put reverse array in output file
-		
+
+		outputFile << str[x] << endl;
+
 		outputFile.close();
-		
+
 	}
-	else cout << "Unable to open file." << endl; //user entered wrong input
-	
+
+	if (argv[1] == NULL) 
+		cout << "Unable to open file." << endl; //user entered wrong input
+
 	return 0;
 }
