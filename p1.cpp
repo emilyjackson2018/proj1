@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -36,6 +37,7 @@ int main (const int argc, const char * argv []) {
 					myArray[c] = line;
 					c++;
 				}
+				replace(line.begin(), line.end(), ',', '\n');
 			}
 			if (temp == 0){ //sets first value of array
 				myArray[c] = line;
