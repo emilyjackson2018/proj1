@@ -5,11 +5,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <string.h>
-//#include <Queue.h>
-//#include <Stack.h>
-//#include <Order.h>
 
 using namespace std;
 
@@ -22,36 +18,50 @@ using namespace std;
   the values of the array in reverse order.
   */
 int main (const int argc, const char * argv []) {
+	string line;
+	ifstream myfile (argv[1]);
+	string str = ""; 
 
-	ifstream in(argv[1]);
-	stringstream buffer;
-	buffer << in.rdbuf();
-	string test = buffer.str();
-	//cout << test << endl << endl;
+	string myArray[256];
+	int c = 0;
+	int temp;
 
-	size_t pos1 = 0;
-	size_t pos2;
+	if (myfile.is_open())
+	{
+		while (getline (myfile,line))
+		{
+			temp = c;
+			for (int i = 0; i < temp; i++) {
+				if (i == temp - 1){
+					myArray[c] = line;
+					c++;
+				}
+			}
+			if (temp == 0){ //sets first value of array
+				myArray[c] = line;
+				c++;
+			}
+		}	
 
-	string str[256];
+		cout << "Array size: " << c << endl;//prints array size
 
-	for (int x = 0; x <= 3; x++) {
-		pos2 = test.find(",", pos1); //search for the comma ",".
-		str[x] = test.substr(pos1, (pos2 - pos1)); 
-		cout << str[x] << endl;
-		//cout << "pos1:" << pos1 << ", pos2:" << pos2 << endl;
-		pos1 = pos2 + 1; 
+		myfile.close();
+
 
 		ofstream outputFile;
 		outputFile.open("output.txt"); //creates text file for outfile
+		
 
-		outputFile << str[x] << endl;
+		for (int i = 0; i <= c; i++){
+			outputFile << myArray[i] << endl;
+		}
 
 		outputFile.close();
 
 	}
-
-	if (argv[1] == NULL) 
-		cout << "Unable to open file." << endl; //user entered wrong input
+	else cout << "Unable to open file." << endl; //user entered wrong input
 
 	return 0;
-}
+} //main
+
+
