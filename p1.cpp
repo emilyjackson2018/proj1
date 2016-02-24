@@ -27,23 +27,19 @@ int main (const int argc, const char * argv []) {
 	stringstream buffer;
 	buffer << in.rdbuf();
 	string test = buffer.str();
-	cout << test << endl << endl;
+	//cout << test << endl << endl;
 
-	//create variables that will act as "cursors". we'll take everything between them.
 	size_t pos1 = 0;
 	size_t pos2;
 
-	//create the array to store the strings.
 	string str[256];
 
-	for (int x = 0; x <= 3; x++){
-		pos2 = test.find(",", pos1); //search for the bar "|". pos2 will be where the bar was found.
-		str[x] = test.substr(pos1, (pos2-pos1)); //make a substring, wich is nothing more 
-		//than a copy of a fragment of the big string.
+	for (int x = 0; x <= 3; x++) {
+		pos2 = test.find(",", pos1); //search for the comma ",".
+		str[x] = test.substr(pos1, (pos2 - pos1)); 
 		cout << str[x] << endl;
-		cout << "pos1:" << pos1 << ", pos2:" << pos2 << endl;
-		pos1 = pos2+1; // sets pos1 to the next character after pos2. 
-		//so, it can start searching the next bar |.
+		//cout << "pos1:" << pos1 << ", pos2:" << pos2 << endl;
+		pos1 = pos2 + 1; 
 
 		ofstream outputFile;
 		outputFile.open("output.txt"); //creates text file for outfile
