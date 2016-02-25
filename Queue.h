@@ -15,6 +15,7 @@
 using namespace std;
 
 class Queue {
+	private LinkedList list;
 	public:
 		int head = 0;
 		int tail = -1;
@@ -23,34 +24,71 @@ class Queue {
 		/**
 		 * Default constructor
 		 */
-		Queue(void) = default;
+		Queue(void) = default {
+			tail = head = NULL;
+		}
 
 		/**
 		 * Constructor
 		 */
-		Queue(string category);
+		Queue(string category) {
+			tail = head = category;
+		}
 
 		/**
 		 * Destructor
 		 */
-		~Queue(void) { }
+		~Queue(void) { 
+			while (!isEmpty()) {
+				dequeue();
+			}
+		}
 
 		/**
 		 * Insert a member into the queue
 		 * at the end
 		 */
-		virtual void enqueue(Order &) = 0;
+		virtual void enqueue(Order &) {
+			Queue *newPtr = new Queue;
+
+			newPtr->Order = newOrder;
+			newPtr->next = NULL;
+			
+			if(isEmpty()) {
+				head = newPtr;
+			}
+			else {
+				tail->next = newPtr;
+			}
+
+			tail = newPtr;
+		}
 
 		/**
 		 * Remove a queue member from the
 		 * front of the queue
 		 */
-		virtual Order & dequeue(void) = 0;
+		virtual Order & dequeue(void) {
+			if (isEmpty()) return false;
+
+			Queue *tempPtr = head;
+			if (head == tail) {
+				head = NULL;
+				tail = NULL;
+			}
+			else head = head->next;
+			
+			tempPtr->next = NULL;
+			delete tempPtr;
+			return true;
+		}
 
 		/**
 		 * Returns the current size of the queue
 		 */
-		virtual int queueSize(void) = 0;
+		virtual int queueSize(void) {
+			return list.size();
+		}
 
 		/**
 		 * Returns true if the queue is empty

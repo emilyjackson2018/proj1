@@ -32,13 +32,24 @@ class Stack {
 		/**
 		 * Push an order object to the top of the stack
 		 */
-		virtual void push(Order & order) = 0;
+		virtual void push(Order & order) {
+			if (top+1 >= size) {
+				order = (Order *) realloc(order, (size) * (sizeOf(Order)));
+			}
+			
+			order[++top] = new Order;
+
+		}
 
 		/**
 		 * Pop the top order from the stack
 		 * to be processed by the printLabel function
 		 */
-		virtual Order & pop(void) = 0;
+		virtual Order & pop(void) = 0 {
+			if (isEmpty()) return false;
+			--top;
+			return true;
+		}
 
 		/**
 		 * Returns the current number of elements

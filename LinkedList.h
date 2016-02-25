@@ -54,8 +54,19 @@ class LinkedList {
 		 * @param category The category of the queue, the node having this queue is being appended
 		 * @param orderQueue The queue this node will have
 		 */
-		void append(string category, Queue &orderQueue);
-
+		void append(string category, Queue &orderQueue) {
+			Node ret = category;
+			if (category == NULL) {
+				return new Node(orderQueue, NULL);
+			}
+			
+			while ((category.next != NULL)) {
+				category = category.next;
+			}
+			
+			category.next = new Node(orderQueue, NULL);
+			return ret;
+		}
 
 		/**
 		 * Returns the queue for a given category.
@@ -63,7 +74,9 @@ class LinkedList {
 		 * for enqueue and dequque operations.
 		 * @param cat the category for the required queue. 
 		 */
-		Queue & getQueueByCat(string cat);
+		Queue & getQueueByCat(string cat) {
+
+		}
 
 		/**
 		 * Sets the value of orderCount for the given category.
@@ -71,12 +84,16 @@ class LinkedList {
 		 * @param cat the category name
 		 * @param count the numbe of orders to dispatch
 		 */
-		void setOrderCount(string cat, int count);
+		void setOrderCount(string cat, int count) {
+
+		}
 
 		/**
 		 * Returns the number of elements in this list.
 		 */
-		const int size() const;
+		const int size() const {
+			return size();	
+		}
 
 		/**
 		 * Returns whether or not this linked list is empty. 
