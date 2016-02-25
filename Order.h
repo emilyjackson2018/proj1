@@ -56,11 +56,6 @@ class Order {
 		 * Destructor
 		 */
 		~Order(void) {
-			//delete Order;
-			orderNumber--;
-			name = "";
-			item = "";
-			category = "";
-			shipArea = "";
+			delete Order;
 		}
 };
