@@ -6,6 +6,8 @@
 
 #include<string>
 
+typedef int StackItemType;
+
 /**
  * This class defines a LIFO stack
  * The stack stores the orders ready to be dispatched.
@@ -15,6 +17,8 @@
 using namespace std;
 
 class Stack {
+	private:
+		StackItemType *items;
 	public:
 		int size = 0;
 		int top = -1;
@@ -22,7 +26,11 @@ class Stack {
 		/**
 		 * constructor
 		 */
-		Stack(void) = default;
+		Stack(void) = default {
+			top = -1;
+			size = 0;
+			items = NULL;
+		}
 
 		/**
 		 * Destructor
@@ -33,11 +41,11 @@ class Stack {
 		 * Push an order object to the top of the stack
 		 */
 		virtual void push(Order & order) {
-			if (top+1 >= size) {
-				order = (Order *) realloc(order, (size) * (sizeOf(Order)));
+			if (top + 1 >= size) {
+				items = (StackItemType *) realloc(items, (size * sizeOf(StackItemType));
 			}
 			
-			order[++top] = new Order;
+			items[++top] = order;
 
 		}
 
@@ -46,9 +54,7 @@ class Stack {
 		 * to be processed by the printLabel function
 		 */
 		virtual Order & pop(void) = 0 {
-			if (isEmpty()) return false;
-			--top;
-			return true;
+			items[top--];
 		}
 
 		/**

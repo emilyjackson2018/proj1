@@ -21,6 +21,9 @@ class Queue {
 		int tail = -1;
 		string category = ""; // the product category whose orders are stored in this queue.
 
+		int *backPtr;
+		int *frontPtr;
+
 		/**
 		 * Default constructor
 		 */
@@ -49,19 +52,19 @@ class Queue {
 		 * at the end
 		 */
 		virtual void enqueue(Order &) {
-			Queue *newPtr = new Queue;
+			LinkedList *newPtr = new LinkedList;
 
-			newPtr->Order = newOrder;
+			newPtr->list = list;
 			newPtr->next = NULL;
 			
 			if(isEmpty()) {
-				head = newPtr;
+				frontPtr = newPtr;
 			}
 			else {
-				tail->next = newPtr;
+				backPtr->next = newPtr;
 			}
 
-			tail = newPtr;
+			backPtr = newPtr;
 		}
 
 		/**
@@ -69,18 +72,15 @@ class Queue {
 		 * front of the queue
 		 */
 		virtual Order & dequeue(void) {
-			if (isEmpty()) return false;
-
-			Queue *tempPtr = head;
-			if (head == tail) {
-				head = NULL;
-				tail = NULL;
+			Queue *tempPtr = frontPtr;
+			if (frontPtr == backpPtr) {
+				frontPtr = NULL;
+				backPtr = NULL;
 			}
-			else head = head->next;
+			else frontPtr = frontPtr->next;
 			
 			tempPtr->next = NULL;
 			delete tempPtr;
-			return true;
 		}
 
 		/**

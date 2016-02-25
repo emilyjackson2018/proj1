@@ -55,17 +55,32 @@ class LinkedList {
 		 * @param orderQueue The queue this node will have
 		 */
 		void append(string category, Queue &orderQueue) {
-			Node ret = category;
-			if (category == NULL) {
-				return new Node(orderQueue, NULL);
+			Node *newnode = new Node;
+			newnode->orderQueue = orderQueue;
+			newnode->next = NULL;	
+			if (length == 0) {
+				headptr = newnode;
+			}
+			else {
+				Node *temp = headptr, *prev = NULL;
+				int pos = 0;
+			}
+
+			while (pos < length) {
+				prev = temp;
+				temp = temp->next;
+				++pos;
+			}
+			newnode->next = temp;
+
+			if (pos == 0) {
+				headptr = newnode;
+			}	
+			else {
+				prev->next = newnode;
 			}
 			
-			while ((category.next != NULL)) {
-				category = category.next;
-			}
-			
-			category.next = new Node(orderQueue, NULL);
-			return ret;
+			++length;
 		}
 
 		/**
@@ -75,7 +90,12 @@ class LinkedList {
 		 * @param cat the category for the required queue. 
 		 */
 		Queue & getQueueByCat(string cat) {
-
+			Node *temp = headptr;
+			while (temp != NULL) {
+				cout << temp->cat << " ";
+				temp ->next;
+			}
+			cout << endl;
 		}
 
 		/**
@@ -85,7 +105,7 @@ class LinkedList {
 		 * @param count the numbe of orders to dispatch
 		 */
 		void setOrderCount(string cat, int count) {
-
+			
 		}
 
 		/**
