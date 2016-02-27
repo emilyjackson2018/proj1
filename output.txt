@@ -5,27 +5,96 @@ Clothing
 Home
 Health
 ORDERS
-John Smith
- Ketchup
- Grocery
- Athens
-Jane Doe
- Phone
- Electronics
- Atlanta
-Bob Barrett
- Tie
- Clothing
- Atlanta
-Lee King
- Hat
- Clothing
- Atlanta
-Abe Lincoln
- Cushions
- Home
- Newark
+John Smith, Ketchup, Grocery, Athens
+Jane Doe, Phone, Electronics, Atlanta
+Bob Barrett, Tie, Clothing, Atlanta
+Lee King, Hat, Clothing, Atlanta
+Abe Lincoln, Cushions, Home, Newark
 DISPATCH
 Grocery 1
 Electronics 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

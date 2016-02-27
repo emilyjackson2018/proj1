@@ -1,69 +1,43 @@
-/* 
- * Name: Emily Jackson (811878298) and Paige Marogil (811081799)
- * Assignment: p0 (CSCI 2720)
- */
-
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <string.h>
-#include <algorithm>
 
 using namespace std;
 
-/**
-  @param const int arg c
-  @param const char * argv[]
-  The purpose of this function is to take in an input textfile, read the integers on each
-  line and store them in an array. The program will not store the value if it is a
-  duplicate. Then the size of the array is outputted and an output file is made with
-  the values of the array in reverse order.
-  */
-int main (const int argc, const char * argv []) {
-	string line;
+int main (const int argc, const char * argv[]) {
+	char line[100];
+	string words[100];
+	int i = 0;
+	
+	/*int begin, end, size;
+	ifstream tempfile (argv[1]);
+	begin = tempfile.tellg();
+	tempfile.seekg (0, ios::end);
+	end = tempfile.tellg();
+	tempfile.close();
+	size = end - begin;*/
+
+	int size = 100;
+
 	ifstream myfile (argv[1]);
-	string str = ""; 
-
-	string myArray[256];
-	int c = 0;
-	int temp;
-
 	if (myfile.is_open())
 	{
-		while (getline (myfile,line))
-		{
-			temp = c;
-			for (int i = 0; i < temp; i++) {
-				if (i == temp - 1){
-					myArray[c] = line;
-					c++;
-				}
-				replace(line.begin(), line.end(), ',', '\n');
-			}
-			if (temp == 0){ //sets first value of array
-				myArray[c] = line;
-				c++;
-			}
-		}	
-
-		cout << "Array size: " << c << endl;//prints array size
-
-		myfile.close();
-
-
-		ofstream outputFile;
-		outputFile.open("output.txt"); //creates text file for outfile
-		
-
-		for (int i = 0; i <= c; i++){
-			outputFile << myArray[i] << endl;
+		for(i = 0; i < size; ++i) {
+			myfile.getline(line, size);
+			words[i]=line;
+			strcpy(line, "");
 		}
-
-		outputFile.close();
-
+		myfile.close();
 	}
-	else cout << "Unable to open file." << endl; //user entered wrong input
+
+	else cout << "Unable to open file"; 
+
+	ofstream outputFile;
+	outputFile.open("output.txt");	
+
+	for(i = 0; i < size; ++i)
+		outputFile << words[i] << endl;
 
 	return 0;
-} //main
-
-
+}
