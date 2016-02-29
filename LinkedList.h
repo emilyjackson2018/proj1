@@ -25,11 +25,10 @@ class Node {
 	private:
 	string category = "";   // The category of products in this node.
 	Queue &orderQueue; // The order queue for this category.
-	Node * prev = nullptr;
-	Node * next = nullptr;
 	public:
 	int orderCount; // The number of orders in this node/category of product to dispatch.
-
+	Node * prev = nullptr;
+	Node * next = nullptr;
 	/**
 	 * Parameterized Constructor
 	 */
@@ -47,7 +46,6 @@ class LinkedList {
 		Node * tailptr = nullptr;
 	public:
 		int length = 0;
-
 		/**
 		 * Adds an item to the end of this list.
 		 *
@@ -55,32 +53,13 @@ class LinkedList {
 		 * @param orderQueue The queue this node will have
 		 */
 		void append(string category, Queue &orderQueue) {
-			Node *newnode = new Node;
-			newnode->orderQueue = orderQueue;
-			newnode->next = NULL;	
-			if (length == 0) {
-				headptr = newnode;
+			if (headptr == NULL) {
+				tailptr = headptr = new Node(headptr, tailptr, category, orderQueue);
 			}
 			else {
-				Node *temp = headptr, *prev = NULL;
-				int pos = 0;
+				tailptr->next = new Node(headptr, tailptr, category, orderQueue);
+				tailptr = tailptr->next;
 			}
-
-			while (pos < length) {
-				prev = temp;
-				temp = temp->next;
-				++pos;
-			}
-			newnode->next = temp;
-
-			if (pos == 0) {
-				headptr = newnode;
-			}	
-			else {
-				prev->next = newnode;
-			}
-			
-			++length;
 		}
 
 		/**
@@ -90,12 +69,7 @@ class LinkedList {
 		 * @param cat the category for the required queue. 
 		 */
 		Queue & getQueueByCat(string cat) {
-			Node *temp = headptr;
-			while (temp != NULL) {
-				cout << temp->cat << " ";
-				temp ->next;
-			}
-			cout << endl;
+			// ?????????
 		}
 
 		/**
@@ -105,7 +79,7 @@ class LinkedList {
 		 * @param count the numbe of orders to dispatch
 		 */
 		void setOrderCount(string cat, int count) {
-			
+			// ?????????
 		}
 
 		/**

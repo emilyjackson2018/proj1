@@ -33,7 +33,7 @@ class Order {
 		/**
 		 * copy constructor
 		 */
-		Order(const Order & order) {
+		Order(const Order &) {
 			this->orderNumber = orderNumber;
 			this->name = name;
 			this->item = item;
@@ -55,7 +55,5 @@ class Order {
 		/**
 		 * Destructor
 		 */
-		~Order(void) {
-			delete Order;
-		}
+		~Order(void);
 };
