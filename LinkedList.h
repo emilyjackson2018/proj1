@@ -80,6 +80,9 @@ class LinkedList {
 		 */
 		void setOrderCount(string cat, int count) {
 			// ?????????
+			if (cat != NULL) {
+				count++;
+			}
 		}
 
 		/**
